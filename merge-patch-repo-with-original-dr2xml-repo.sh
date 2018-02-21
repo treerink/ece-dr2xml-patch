@@ -9,7 +9,7 @@
 
 if [ "$#" -eq 0 ]; then
  dir_patch_repo=${HOME}/cmorize/dr2xml/ece-dr2xml-patch
- dir_original_dr2xml_repo=${HOME}/cmorize/dr2xml/dr2xml-repository-test
+ dir_original_dr2xml_repo=${HOME}/cmorize/dr2xml/dr2xml-repository
 
  cp ${dir_patch_repo}/dr2xml.py                    ${dir_original_dr2xml_repo}/dr2xml.py
  cp ${dir_patch_repo}/Xparse.py                    ${dir_original_dr2xml_repo}/Xparse.py
