@@ -1,0 +1,57 @@
+diff --git a/Xparse.py b/Xparse.py
+index 3c47c69..848fa1d 100644
+--- a/Xparse.py
++++ b/Xparse.py
+@@ -213,6 +213,11 @@ def select_context(rootel,context_id):
+ # mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
+ def init_context(context_id,path_parse="./",printout=False):
+     # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml
++    path_parse="../../shaconemo/ORCA1_LIM3_PISCES/EXP00/"
++   #path_parse="/usr/people/reerink/ec-earth3/runtime/classic/ctrl/"
++    # In order to generate a iodef.xml in the EC-EARTH3 ctrl directory run the following script: 
++    # /usr/people/reerink/ec-earth3/runtime/classic/ctrl/modify-file_def-for-dr2xml.csh
++    # Also set the hcack in dr2xml.py to: margs={"alias":"sst"}
+     xmldef=path_parse+"iodef.xml"
+     if printout: print "Parsing %s ..."%xmldef,
+     rootel=ET.parse(xmldef).getroot()
+diff --git a/dr2xml.py b/dr2xml.py
+index 97893f8..c95bc72 100644
+--- a/dr2xml.py
++++ b/dr2xml.py
+@@ -1604,6 +1604,23 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
+         if target_hgrid_id :
+             # Must create and a use a grid similar to the last one defined 
+             # for that variable, except for a change in the hgrid/domain
++
++           # This hack block is not necessary in case the two lines with "CMIP6_tos" and "CMIP6_sos" are removed from the ocean ping file.
++           #print
++           #print ' THOMAS: ', pingvars
++            print
++            print ' THOMAS pre  hack: margs =', margs
++            if margs.values()[1] == "CMIP6_tos":                          # Added by Thomas Reerink, seems to solve/circumvent a BUG
++             margs={"ping_alias":"sst_pot"}                               # Added by Thomas Reerink, seems to solve/circumvent a BUG
++            #margs={"ping_alias":"sst"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG in case using the EC-EARTH3 files
++            elif margs.values()[1] == "CMIP6_sos":                        # Added by Thomas Reerink, seems to solve/circumvent a BUG
++             margs={"ping_alias":"sss"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG
++            else:                                                         # Added by Thomas Reerink, seems to solve/circumvent a BUG
++             print ' \n Unkown exception in hack: ', margs.values()[1]    # Added by Thomas Reerink, seems to solve/circumvent a BUG
++             sys.exit(" Program stop\n")                                  # Added by Thomas Reerink, seems to solve/circumvent a BUG
++            print ' THOMAS post hack: margs =', margs
++            print
++
+             grid_ref=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,**margs)
+             if grid_ref is False or grid_ref is None : 
+                 raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s"%(alias,target_hgrid_id))
+@@ -2733,9 +2750,9 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
+             if any([ v.modeling_realm == r or r in var_realms
+                      for r in lrealms]) :
+                 lvars.append(v)
+-        if context in settings['orphan_variables'] and \
+-           v.label in settings['orphan_variables'][context] :
+-            lvars.append(v)
++#        if context in settings['orphan_variables'] and \
++#           v.label in settings['orphan_variables'][context] :
++#            lvars.append(v)
+     lvars.sort(key=lambda x:x.label_without_psuffix)
+ 
+     # Remove duplicates : want to get one single entry for all variables having
