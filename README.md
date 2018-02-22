@@ -2,7 +2,15 @@
 This repository only contains the patch files needed to get dr2xml run for EC-Earth members
 
 ## dr2xml
-The dr2xml repository can be found at: https://github.com/senesis/dr2pub and currently we are using its master branch.
+The dr2xml repository can be found at: https://github.com/senesis/dr2pub and currently we are using its master branch, which can be downloaded by:
+```shell
+cd ${HOME}/cmorize/dr2xml/
+git clone https://github.com/senesis/dr2pub dr2xml-repository
+```
+This patch matches with the pre-0.28 version of 14 feb 2018, which can be checked out by:
+```shell
+git checkout 93bb8ee5f15efa04a57531c1ddf2d07bff4d5cb1
+```
 
 ## dr2xml issue wiki at EC-Earth portal
 An [EC-Earth wiki page](https://dev.ec-earth.org/projects/cmip6/wiki/Dr2xml_issues) at the portal addresses this issue.
