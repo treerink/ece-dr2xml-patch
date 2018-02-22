@@ -4,8 +4,7 @@
 #   export PYTHONPATH=$HOME/cmorize/dr2xml/dreq-repository/dreqPy:${PYTHONPATH}
 #   activateanaconda
 
-# n ece_dr2xml.py ece_create_ping_files.py dr2xml.py Xparse.py change-log-of-hacks.txt dr2xml_nemo.xml
-# n ${HOME}/ec-earth3/runtime/classic/ctrl/modify-file_def-for-dr2xml.csh
+# n ece_dr2xml.py ece_create_ping_files.py dr2xml.py change-log-of-hacks.txt dr2xml_nemo.xml ping_nemo.xml ../ece-dr2xml-patch/*.sh
 
 #EC-EARTH3-AOGCM:    DCPP,LS3MIP,RFMIP,ScenarioMIP,VolMIP,CORDEX,DynVar,SIMIP,VIACSAB
 #EC-EARTH3-HR:       DCPP,HighResMIP                                                 
@@ -32,6 +31,8 @@ from dr2xml import generate_file_defs, example_lab_and_model_settings, example_s
 
 # Overwrite a few ec-earth specific settings:
 example_lab_and_model_settings['institution_id'] = "EC-Earth-Consortium"
+example_lab_and_model_settings['path_to_parse'] = "../../shaconemo/ORCA1_LIM3_PISCES/EXP00/"
+#example_lab_and_model_settings['path_to_parse'] = "../../../ec-earth-3.2.3/runtime/classic/ctrl/"  # Run/follow the modify-file_def-for-dr2xml.csh from the ece-dr2xml-patch repository.
 
 generate_file_defs(lset=example_lab_and_model_settings, 
                    sset=example_simulation_settings, 

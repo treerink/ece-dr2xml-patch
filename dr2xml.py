@@ -110,6 +110,8 @@ example_lab_and_model_settings={
 
     'institution_id': "CNRM-CERFACS", # institution should be read in CMIP6_CV, if up-to-date
 
+    'path_to_parse': "./",  # The path of the directory which contains the iodef.xml, field_def, etc files.
+
     # We describe the "CMIP6 source type" (i.e. components assembly) which is the default
     # for each model. This value can be changed on a per experiment basis, in experiment_settings file
     # However, using a 'configuration' is finer (see below)
@@ -1612,7 +1614,7 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
             print ' THOMAS pre  hack: margs =', margs
             if margs.values()[1] == "CMIP6_tos":                          # Added by Thomas Reerink, seems to solve/circumvent a BUG
              margs={"ping_alias":"sst_pot"}                               # Added by Thomas Reerink, seems to solve/circumvent a BUG
-            #margs={"ping_alias":"sst"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG in case using the EC-EARTH3 files
+            #margs={"ping_alias":"sst"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG in the field_def file in the EC-EARTH3 repository only "sst" is available while "sst_pot" not
             elif margs.values()[1] == "CMIP6_sos":                        # Added by Thomas Reerink, seems to solve/circumvent a BUG
              margs={"ping_alias":"sss"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG
             else:                                                         # Added by Thomas Reerink, seems to solve/circumvent a BUG
