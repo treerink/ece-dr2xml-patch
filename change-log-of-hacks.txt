@@ -1,24 +1,17 @@
-diff --git a/Xparse.py b/Xparse.py
-index 3c47c69..848fa1d 100644
---- a/Xparse.py
-+++ b/Xparse.py
-@@ -213,6 +213,11 @@ def select_context(rootel,context_id):
- # mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
- def init_context(context_id,path_parse="./",printout=False):
-     # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml
-+    path_parse="../../shaconemo/ORCA1_LIM3_PISCES/EXP00/"
-+   #path_parse="/usr/people/reerink/ec-earth3/runtime/classic/ctrl/"
-+    # In order to generate a iodef.xml in the EC-EARTH3 ctrl directory run the following script: 
-+    # /usr/people/reerink/ec-earth3/runtime/classic/ctrl/modify-file_def-for-dr2xml.csh
-+    # Also set the hcack in dr2xml.py to: margs={"alias":"sst"}
-     xmldef=path_parse+"iodef.xml"
-     if printout: print "Parsing %s ..."%xmldef,
-     rootel=ET.parse(xmldef).getroot()
 diff --git a/dr2xml.py b/dr2xml.py
-index 97893f8..c95bc72 100644
+index 97893f8..4053c6b 100644
 --- a/dr2xml.py
 +++ b/dr2xml.py
-@@ -1604,6 +1604,23 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
+@@ -110,6 +110,8 @@ example_lab_and_model_settings={
+ 
+     'institution_id': "CNRM-CERFACS", # institution should be read in CMIP6_CV, if up-to-date
+ 
++    'path_to_parse': "./",  # The path of the directory which contains the iodef.xml, field_def, etc files.
++
+     # We describe the "CMIP6 source type" (i.e. components assembly) which is the default
+     # for each model. This value can be changed on a per experiment basis, in experiment_settings file
+     # However, using a 'configuration' is finer (see below)
+@@ -1604,6 +1606,23 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
          if target_hgrid_id :
              # Must create and a use a grid similar to the last one defined 
              # for that variable, except for a change in the hgrid/domain
@@ -30,7 +23,7 @@ index 97893f8..c95bc72 100644
 +            print ' THOMAS pre  hack: margs =', margs
 +            if margs.values()[1] == "CMIP6_tos":                          # Added by Thomas Reerink, seems to solve/circumvent a BUG
 +             margs={"ping_alias":"sst_pot"}                               # Added by Thomas Reerink, seems to solve/circumvent a BUG
-+            #margs={"ping_alias":"sst"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG in case using the EC-EARTH3 files
++            #margs={"ping_alias":"sst"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG in the field_def file in the EC-EARTH3 repository only "sst" is available while "sst_pot" not
 +            elif margs.values()[1] == "CMIP6_sos":                        # Added by Thomas Reerink, seems to solve/circumvent a BUG
 +             margs={"ping_alias":"sss"}                                   # Added by Thomas Reerink, seems to solve/circumvent a BUG
 +            else:                                                         # Added by Thomas Reerink, seems to solve/circumvent a BUG
@@ -42,7 +35,7 @@ index 97893f8..c95bc72 100644
              grid_ref=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,**margs)
              if grid_ref is False or grid_ref is None : 
                  raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s"%(alias,target_hgrid_id))
-@@ -2733,9 +2750,9 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
+@@ -2733,9 +2752,9 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
              if any([ v.modeling_realm == r or r in var_realms
                       for r in lrealms]) :
                  lvars.append(v)

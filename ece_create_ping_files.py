@@ -4,8 +4,7 @@
 #   export PYTHONPATH=$HOME/cmorize/dr2xml/dreq-repository/dreqPy:${PYTHONPATH}
 #   activateanaconda
 
-# n ece_dr2xml.py ece_create_ping_files.py dr2xml.py Xparse.py change-log-of-hacks.txt dr2xml_nemo.xml
-# n ${HOME}/ec-earth3/runtime/classic/ctrl/modify-file_def-for-dr2xml.csh
+# n ece_dr2xml.py ece_create_ping_files.py dr2xml.py change-log-of-hacks.txt dr2xml_nemo.xml ping_nemo.xml ../ece-dr2xml-patch/*.sh
 
 
 # Create the most extensive NEMO ping file based on all CMIP6 MIPs, tier=3 and priority=3
