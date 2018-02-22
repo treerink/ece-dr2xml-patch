@@ -12,7 +12,6 @@ if [ "$#" -eq 0 ]; then
  dir_original_dr2xml_repo=${HOME}/cmorize/dr2xml/dr2xml-repository
 
  diff ${dir_patch_repo}/dr2xml.py                  ${dir_original_dr2xml_repo}/dr2xml.py
- diff ${dir_patch_repo}/Xparse.py                  ${dir_original_dr2xml_repo}/Xparse.py
  diff ${dir_patch_repo}/ece_create_ping_files.py   ${dir_original_dr2xml_repo}/ece_create_ping_files.py
  diff ${dir_patch_repo}/ece_dr2xml.py              ${dir_original_dr2xml_repo}/ece_dr2xml.py
  
