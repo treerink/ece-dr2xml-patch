@@ -8,22 +8,20 @@ The dr2xml repository can be found at: https://github.com/senesis/dr2pub and cur
 An [EC-Earth wiki page](https://dev.ec-earth.org/projects/cmip6/wiki/Dr2xml_issues) at the portal addresses this issue.
 
 ## Default the Shaconemo repository is required
-Default a checkout of the Shaconemo repository is assumed, matching the path as in the modified code of Xparse.py and in ece_dr2xml.py as in this patch repository.
+Default a checkout of the Shaconemo repository is assumed, matching the paths in ece_dr2xml.py. This concerns the path_to_parse path of the directory containing the iodef.xml, the field_def file etc and the path to the pingfile.
 
 ## Alternatively the EC-Earth repository can be used
-If the EC-Earth repository is used instead of the Shaconemo repository some additonal changes have to be made as pointed out on the [EC-Earth wiki page](https://dev.ec-earth.org/projects/cmip6/wiki/Dr2xml_issues). Note that also the Xparse.py needs uncommenting/commenting in the block of a few lines modified code.
+If the EC-Earth repository is used instead of the Shaconemo repository some additonal changes have to be made as pointed out on the [EC-Earth wiki page](https://dev.ec-earth.org/projects/cmip6/wiki/Dr2xml_issues). In fact running in the ece-dr2xml-patch repository of the  modify-file_def-for-dr2xml.sh  script does the job. In addition the path_to_parse path in ece_dr2xml.py and the sst_pot in dr2xml.py have to be adjusted but this is messaged by the modify-file_def-for-dr2xml.sh script.
 
 ## ece patch files
-The dr2xml.py and Xparse.py here have a few modifcations relative to the pre-0.28 tag release of dr2xml, and can be used to overwrite locally these files in your dr2xml checkout in order to get it running (We don't claim so far it is correctly running).
+The dr2xml.py has a few modifcations relative to the pre-0.28 tag release of dr2xml, and can be used to overwrite locally this file in your dr2xml checkout in order to get it running (We don't claim so far it is correctly running). Further the ece_create_ping_files.py and ece_dr2xml.py can be copied in the root directory of your local dr2xml repository. The  merge-patch-repo-with-original-dr2xml-repo.sh  can do this from the ece-dr2xml-patch repository.
 
-Further the ece_create_ping_files.py and ece_dr2xml.py can be copied in the root directory of your local dr2xml repository.
-
-Thereafter running reate_ping_files.py in the root directory of your local dr2xml repository goes like:
+Thereafter running create_ping_files.py in the root directory of your local dr2xml repository goes like:
 
  ```shell
 python ece_create_ping_files.py
  ```
-Thereafter running dr2xml in the root directory of your local dr2xml repository goes like:
+And running dr2xml in the root directory of your local dr2xml repository goes like:
 
  ```shell
 python ece_dr2xml.py
