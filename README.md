@@ -16,7 +16,7 @@ git checkout 93bb8ee5f15efa04a57531c1ddf2d07bff4d5cb1
 An [EC-Earth wiki page](https://dev.ec-earth.org/projects/cmip6/wiki/Dr2xml_issues) at the portal addresses this issue.
 
 ## Default the Shaconemo repository is required
-Default a checkout of the Shaconemo repository is assumed like:
+The Shaconemo repository is used by default, it can be downloaded by (an [shaconemo](http://forge.ipsl.jussieu.fr/nemo/wiki/Users) account is required):
 
 ```shell
  mkdir -p ${HOME}/cmorize/shaconemo/; cd ${HOME}/cmorize/shaconemo/
@@ -30,12 +30,12 @@ If the EC-Earth repository is used instead of the Shaconemo repository some addi
 ## ece patch files
 The dr2xml.py has a few modifcations relative to the pre-0.28 tag release of dr2xml, and can be used to overwrite locally this file in your dr2xml checkout in order to get it running (We don't claim so far it is correctly running). Further the ece_create_ping_files.py and ece_dr2xml.py can be copied in the root directory of your local dr2xml repository. The  merge-patch-repo-with-original-dr2xml-repo.sh  can do this from the ece-dr2xml-patch repository.
 
-Thereafter running create_ping_files.py in the root directory of your local dr2xml repository goes like:
+Thereafter the create_ping_files.py can be run from the dr2xml repository by:
 
  ```shell
 python ece_create_ping_files.py
  ```
-And running dr2xml in the root directory of your local dr2xml repository goes like:
+And dr2xml.py runs from the dr2xml repository by:
 
  ```shell
 python ece_dr2xml.py
