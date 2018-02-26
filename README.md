@@ -40,3 +40,19 @@ And dr2xml.py runs from the dr2xml repository by:
  ```shell
 python ece_dr2xml.py
  ```
+
+## Additional issues with latest dr2xml versions 0.97 - 0.99
+With the ece-dr2xml-patch it is possible to get dr2xml running until the following version (16 feb 2018) which can be checked out like this:
+```shell
+ cd ${HOME}/cmorize/dr2xml/dr2xml-repository/
+ git checkout dr2xml.py; git checkout master
+ git checkout b5ca5961891f66d99e1d00e4780897e2dd3e2039
+ ```
+It is possible to run with this patch dr2xml with a little later version (19 feb 2018) by removing the CMIP6_hcont300 and CMIP6_sftof variables from the ocean ping file, the latest working version in that case can be checked out like this:
+```shell
+ cd ${HOME}/cmorize/dr2xml/dr2xml-repository/
+ git checkout dr2xml.py; git checkout master
+ git checkout 4f03d659fe5fd4871925e55eaacea5e9f519d0dc
+ ```
+With the versions after this one none of the variables from the ping file can be found for an unclear reason so far.
+
